@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+		
+	<tx:annotation-driven/>
+	
+    <bean id="dataSourceDev"
+              class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${db-dev.driver}" />
+        <property name="url" value="${db-dev.url}" />
+        <property name="username" value="${db-dev.user}" />
+        <property name="password" value="${db-dev.pass}" />
+    </bean>
+    
+    <bean id="dataSourceQa"
+              class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${db-qa.driver}" />
+        <property name="url" value="${db-qa.url}" />
+        <property name="username" value="${db-qa.user}" />
+        <property name="password" value="${db-qa.pass}" />
+    </bean>
+    
+    <bean id="dataSourceStaging"
+              class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${db-staging.driver}" />
+        <property name="url" value="${db-staging.url}" />
+        <property name="username" value="${db-staging.user}" />
+        <property name="password" value="${db-staging.pass}" />
+    </bean>        
+
+    <bean id="jdbcTemplateDev" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSourceDev" />
+    </bean>	
+
+    <bean id="jdbcTemplateQa" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSourceQa" />
+    </bean>	
+
+    <bean id="jdbcTemplateStaging" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSourceStaging" />
+    </bean>	
+    	
+</beans>
